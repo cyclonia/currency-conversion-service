@@ -29,6 +29,7 @@ public class CurrencyConversionController {
 		uriVariables.put("from", from);
 		uriVariables.put("to", to);
 
+		logger.info("Calling exchange service");
 		ResponseEntity<CurrencyConversionBean> response = new RestTemplate().getForEntity(
 				"http://localhost:8001/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,
 				uriVariables);
@@ -46,6 +47,7 @@ public class CurrencyConversionController {
 	public CurrencyConversionBean getCurrecyValuewithFeign(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity) {
 
+		logger.info("Calling exchange service");
 		CurrencyConversionBean convertedCurrencyBean = proxy.getExchangeValue(from, to);
 
 		logger.info("{}", convertedCurrencyBean.toString());
